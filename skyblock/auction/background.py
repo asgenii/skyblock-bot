@@ -19,7 +19,7 @@ def main(userapi, useruuid, notified_auctions):
 
                 item_name = auc_data.get("item_name", "Unknown")
                 sold_price = auc_data.get("highest_bid_amount", auc_data.get("starting_bid", 0))
-                result += f"Продано: {item_name} | За: {sold_price}\n"
+                result += f"{item_name} | {sold_price}\n"
                 notified_auctions.add(auc_id)
             
     return result
