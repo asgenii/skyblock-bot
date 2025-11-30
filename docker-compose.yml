@@ -1,0 +1,6 @@
+services:
+  app:
+    image: skyblock_bot
+    build:
+      context: .
+      dockerfile: docker/Dockerfile

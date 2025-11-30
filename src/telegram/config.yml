@@ -1,0 +1,3 @@
+token: "8184628126:AAGEtGJF6YlvLfVnTQIKIgu5THKZ_EAJHXk"
+messages:
+  auction_sold: "[log | $time$] $nickname$'s $item$ was sold for $price$"

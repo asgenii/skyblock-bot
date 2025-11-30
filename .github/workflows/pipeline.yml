@@ -1,0 +1,53 @@
+name: pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: setup checkout@v3
+        uses: actions/checkout@v3
+
+      - name: setup python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: run test
+        run: |
+          export PYTHONPATH="$PYTHONPATH:$PWD"
+          pytest -v
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: ssh and deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+            cd ${{ secrets.DEPLOY_PATH }}
+            rm -rf skyblock-bot
+
+            git clone git@github.com:asgenii/skyblock-bot.git
+            cd skyblock-bot
+            docker compose up --build
