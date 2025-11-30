@@ -42,7 +42,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Налаштування SSH
             mkdir -p ~/.ssh
             ssh-keyscan github.com >> ~/.ssh/known_hosts
 
@@ -50,10 +49,8 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
             rm -rf skyblock-bot
 
-            # Клонування репозиторію
             git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/asgenii/skyblock-bot.git
             cd skyblock-bot
 
-            # Використовуємо новий docker compose і вимикаємо BuildKit
             export DOCKER_BUILDKIT=0
-            docker compose up --build -d
+            docker-compose up -d --build
