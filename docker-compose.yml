@@ -3,4 +3,4 @@ services:
     image: skyblock_bot
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/DockerFile
