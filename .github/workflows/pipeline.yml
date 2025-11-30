@@ -50,4 +50,4 @@ jobs:
 
             git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/asgenii/skyblock-bot.git
             cd skyblock-bot
-            docker compose up --build
+            docker-compose up --build
