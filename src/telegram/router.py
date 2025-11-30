@@ -25,7 +25,7 @@ async def permanent(bot):
                     log += f"[log | {datetime.now().strftime('%H:%M:%S')}] {user['nickname']}'s {i[1]['item']} was sold for {i[1]['price']}\n"
                     
                     # edit message down here
-                    message += f'{i[1]['item']} was sold for {i[1]['price']}\n'
+                    message += f"{i[1]['item']} was sold for {i[1]['price']}\n"
 
                 try:
                     await bot.send_message(chat_id = int(userid), text = message)
