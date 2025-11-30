@@ -28,7 +28,7 @@ jobs:
         run: |
           export PYTHONPATH="$PWD/src"
           pytest -v
-          
+
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -48,6 +48,6 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
             rm -rf skyblock-bot
 
-            git clone git@github.com:asgenii/skyblock-bot.git
+            git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/asgenii/skyblock-bot.git
             cd skyblock-bot
             docker compose up --build
