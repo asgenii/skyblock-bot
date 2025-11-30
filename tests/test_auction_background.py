@@ -3,7 +3,7 @@ from pathlib import Path
 
 sys.path.append(os.path.abspath('../src'))
 
-from skyblock.auction import background
+from src.skyblock.auction import background
 
 @pytest.mark.asyncio
 async def test_background_filters_ended_auctions(monkeypatch):

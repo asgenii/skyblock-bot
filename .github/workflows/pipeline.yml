@@ -26,9 +26,9 @@ jobs:
 
       - name: run test
         run: |
-          export PYTHONPATH="$PYTHONPATH:$PWD"
+          export PYTHONPATH="$PWD/src"
           pytest -v
-
+          
   deploy:
     needs: test
     runs-on: ubuntu-latest
