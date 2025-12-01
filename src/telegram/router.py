@@ -15,7 +15,6 @@ async def chat(message: Message):
 
 async def permanent(bot):
     ah_notified = set()
-    config = ymlme.main('telegram/config.yml')
     while True:
         for userid, user in jsonme.main('data/users.json').items():
             data = await background.main(user["API"], user["UUID"], ah_notified)

@@ -1,4 +1,4 @@
-import requests, time
+import time, asyncio
 from ..api import cooldown as apicooldown
 
 async def main(userapi, useruuid, notified_auctions):
@@ -6,6 +6,11 @@ async def main(userapi, useruuid, notified_auctions):
     now = int(time.time() * 1000)
 
     data = await apicooldown(f"https://api.hypixel.net/skyblock/auction?key={userapi}&player={useruuid}")
+    if data['throttle'] == True:
+        print('[log] api down? retrying in 10 seconds...')
+        await asyncio.sleep(10)
+        return {}
+
     ah = data.get("auctions", [])
 
     for i in ah:

@@ -7,7 +7,7 @@ last_request = 0
 async def cooldown(url: str):
     global last_request
 
-    wait = 3 - (time.time() - last_request)
+    wait = 10 - (time.time() - last_request)
     if wait > 0:
         await asyncio.sleep(wait)
 
